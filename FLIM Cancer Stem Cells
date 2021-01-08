@@ -1,0 +1,32 @@
+flim <- read.table(file = "clipboard", sep = "\t", header=TRUE)
+ggplot(flim, aes(x = a1.a2)) + geom_density(aes(group = Sorting, color = Sorting, fill = Sorting), alpha = 0.3) + facet_wrap(~Type+Criterion)
+ggplot(flim, aes(x = tm)) + geom_density(aes(group = Sorting, color = Sorting, fill = Sorting), alpha = 0.3) + facet_wrap(~Type+Criterion)
+library("writexl")
+testratio1 <- compare_means(tm ~ Cells, data = flim)
+write_xlsx(testratio1, "C:\\Games\\7501.xlsx")
+
+#For barcoding the groups:
+ggplot(flim, aes(x = Type, y = a1.a2, fill = Sorting, color = UniqueBarcode)) + facet_wrap(~Criterion) + geom_boxplot()+
+    scale_fill_viridis(discrete = TRUE, alpha=0.6) + 
+    geom_jitter( size=0.4, alpha=0.9, width = 0.1) + geom_text(aes(label = UniqueBarcode))
+
+#If no barcode needed:
+ggplot(flim, aes(x = Type, y = a1.a2, fill = Sorting)) + facet_wrap(~Criterion) + geom_boxplot()+
+    scale_fill_viridis(discrete = TRUE, alpha=0.6) + 
+    geom_jitter( size=0.4, alpha=0.9, width = 0.1)
+
+#For different markers:
+#This one is for CDs
+ggplot(subset(flim, Criterion == "CD"), aes(x = Type, y = a1.a2, fill = Sorting)) + facet_wrap(~Criterion) + geom_boxplot()+
+    scale_fill_viridis(discrete = TRUE, alpha=0.6) + 
+    geom_jitter( size=0.4, alpha=0.9, width = 0.1)
+
+#Adjusting facet_wrap() here:
+ggplot(subset(flim, Criterion == "CD"), aes(x = Type, y = a1.a2, fill = Sorting)) + facet_wrap(~Criterion) + geom_boxplot()+
+    scale_fill_viridis(discrete = TRUE, alpha=0.6) + 
+    geom_jitter( size=0.4, alpha=0.9, width = 0.1) +facet_wrap(~Type, scale = "free_x")
+
+ggplot(subset(flim, Criterion == "ALD"), aes(x = Cells, y = tm, fill = Sorting)) + facet_wrap(~Criterion) + geom_boxplot()+
+    scale_fill_viridis(discrete = TRUE, alpha=0.6) + 
+    geom_jitter( size=0.8, alpha=0.9, width = 0.1) +facet_wrap(~Type, scale = "free_x") + theme(axis.title.x=element_blank(),axis.text.x=element_blank(), axis.ticks.x=element_blank())
+
