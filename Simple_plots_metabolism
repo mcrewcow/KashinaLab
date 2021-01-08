@@ -1,0 +1,46 @@
+install.packages("ggplot2")
+library(ggplot2)
+
+#Here are some boxplots for the data
+#For NAD metabolism:
+ggplot(NADH_int, aes(x = Cell, y = Amount, fill = Cell))+
+    geom_boxplot()+  scale_fill_viridis(discrete = TRUE, alpha=0.6) +
+    geom_jitter(color="black", size=0.4, alpha=0.9) + theme_ipsum() + 
+    theme(
+        legend.position="none",
+        plot.title = element_text(size=11)
+    ) +
+    ggtitle("                                       NADH intensity") +
+    xlab("Cell type")
+
+#For FAD metabolism:
+ggplot(FAD_int, aes(x = Cell, y = Amount, fill = Cell))+
+    geom_boxplot()+  scale_fill_viridis(discrete = TRUE, alpha=0.6) +
+    geom_jitter(color="black", size=0.4, alpha=0.9) + theme_ipsum() + 
+    theme(
+        legend.position="none",
+        plot.title = element_text(size=11)
+    ) +
+    ggtitle("                                       FAD intensity") +
+    xlab("Cell type")
+
+#For pH data:
+ggplot(pH, aes(x = Cell, y = Amount, fill = Cell)) +
+    geom_boxplot() + scale_fill_viridis(discrete = TRUE, alpha=0.6) + 
+    theme(
+        legend.position="none",
+        plot.title = element_text(size=11)
+    ) +
+    ggtitle("                                                                 pH") +
+    xlab("Cell type")
+
+
+#For a1/a2 metabolic ratio:
+ggplot(Ratio, aes(x = Cell, y = Amount, fill = Cell)) +
+    geom_boxplot() + scale_fill_viridis(discrete = TRUE, alpha=0.6) + 
+    theme(
+        legend.position="none",
+        plot.title = element_text(size=11)
+    ) +
+    ggtitle("                                                        FAD/NADH ratio") +
+    xlab("Cell type")
