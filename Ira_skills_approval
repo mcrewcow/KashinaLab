@@ -1,0 +1,7 @@
+library(ggplot2)
+ggplot(flimtest, aes(x = author, y = *YOUR_PARAMETER*, fill = author, alpha = 0.3)) + 
+geom_boxplot() + theme_bw() + geom_jitter(aes(color = author))  # to create the summary boxplot
+
+
+ggplot(flimtest, aes(x = author, y = *YOUR PARAMETER*, fill = author, alpha = 0.3)) + 
+geom_boxplot() + theme_bw() + geom_jitter(aes(color = author)) + facet_wrap(~barcode, nrow = 1) # to create the facet_wrap one
