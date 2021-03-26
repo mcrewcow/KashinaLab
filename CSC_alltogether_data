@@ -1,0 +1,20 @@
+#This code is for arranged plots
+library(ggplot2)
+library(gridExtra)
+library(ggpubr)
+
+#Plots for tm, t1, t2 and ratio
+p1 <- ggplot(cscflim, aes(x = ZoneBarcode, y = a1.a2, fill = ZoneBarcode, alpha = 0.3)) +
+ geom_boxplot() + theme_minimal() + geom_jitter(aes(color = ZoneBarcode)) + 
+ggtitle('a1/a2 ratio') + theme(legend.position = 'none') + stat_compare_means()
+p2 <- ggplot(cscflim, aes(x = ZoneBarcode, y = tm, fill = ZoneBarcode, alpha = 0.3)) +
+geom_boxplot() + theme_minimal() + geom_jitter(aes(color = ZoneBarcode)) + 
+ggtitle('tm') + theme(legend.position = 'none') + stat_compare_means()
+p3 <- ggplot(cscflim, aes(x = ZoneBarcode, y = t1, fill = ZoneBarcode, alpha = 0.3)) + geom_boxplot() + 
+theme_minimal() + geom_jitter(aes(color = ZoneBarcode)) + 
+ggtitle('t1') + theme(legend.position = 'none') + stat_compare_means()
+p4 <- ggplot(cscflim, aes(x = ZoneBarcode, y = t2, fill = ZoneBarcode, alpha = 0.3)) + geom_boxplot() + 
+theme_minimal() + geom_jitter(aes(color = ZoneBarcode)) + 
+ggtitle('t2') + theme(legend.position = 'none') + stat_compare_means()
+
+grid.arrange(p1, p2, p3, p4, nrow = 1)
