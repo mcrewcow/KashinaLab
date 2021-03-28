@@ -18,3 +18,13 @@ theme_minimal() + geom_jitter(aes(color = ZoneBarcode)) +
 ggtitle('t2') + theme(legend.position = 'none') + stat_compare_means()
 
 grid.arrange(p1, p2, p3, p4, nrow = 1)
+
+
+#don't forget my_comparisons = list(c(),c(),c()) before:
+cscflim <- read.table(file = "clipboard", sep = "\t", header=TRUE)
+cscflim$ZoneBarcode <- factor(cscflim$ZoneBarcode, levels = c('44-133-','44+','133+','44+133+'))
+p1 <- ggplot(cscflim, aes(x = ZoneBarcode, y = a1.a2, fill = ZoneBarcode, alpha = 0.3)) + geom_boxplot() + theme_minimal() + geom_jitter(aes(color = ZoneBarcode)) + ggtitle('a1/a2 ratio') + theme(legend.position = 'none') + stat_compare_means(label = 'p.signif', comparisons = my_comparisons)
+p2 <- ggplot(cscflim, aes(x = ZoneBarcode, y = tm, fill = ZoneBarcode, alpha = 0.3)) + geom_boxplot() + theme_minimal() + geom_jitter(aes(color = ZoneBarcode)) + ggtitle('tm') + theme(legend.position = 'none') + stat_compare_means(label = 'p.signif', comparisons = my_comparisons)
+p3 <- ggplot(cscflim, aes(x = ZoneBarcode, y = t1, fill = ZoneBarcode, alpha = 0.3)) + geom_boxplot() + theme_minimal() + geom_jitter(aes(color = ZoneBarcode)) + ggtitle('t1') + theme(legend.position = 'none') + stat_compare_means(label = 'p.signif',comparisons = my_comparisons)
+p4 <- ggplot(cscflim, aes(x = ZoneBarcode, y = t2, fill = ZoneBarcode, alpha = 0.3)) + geom_boxplot() + theme_minimal() + geom_jitter(aes(color = ZoneBarcode)) + ggtitle('t2') + theme(legend.position = 'none') + stat_compare_means(label = 'p.signif',comparisons = my_comparisons)
+grid.arrange(p1, p2, p3, p4, nrow = 1)
